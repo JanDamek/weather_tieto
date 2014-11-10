@@ -18,12 +18,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Endpoint
 public class WeatherEndpoint {
-	private static final String NAMESPACE_URI = "http://localhost:8080/";
+	private static final String NAMESPACE_URI = "http://localhost:8080/soap";
 
 	@Autowired
 	private WeatherDao weatherDao;
 
-	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getWeatherRequest")
+	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getWeather")
 	@ResponsePayload
 	public GetWeatherResponse getWeather(@RequestPayload GetWeatherRequest request) {
 		GetWeatherResponse response = new GetWeatherResponse();
