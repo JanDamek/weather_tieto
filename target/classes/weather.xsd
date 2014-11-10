@@ -1,0 +1,48 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://soap.weather_tieto.damek.com" targetNamespace="http://soap.weather_tieto.damek.com"
+	elementFormDefault="qualified">
+
+	<xs:element name="getWeatherRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="weather_location" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="weather">
+		<xs:sequence>
+			<xs:element name="location" type="xs:string" />
+			<xs:element name="timestamp" type="xs:string" />
+			<xs:element name="temp_celsius" type="xs:double" />
+			<xs:element name="relative_humidity" type="xs:integer" />
+			<xs:element name="wind_speed_m_per_s" type="xs:double" />
+			<xs:element name="wind_direction" type="xs:string" />
+			<xs:element name="wind_description" type="xs:string" />
+			<xs:element name="weather_description" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	    <xs:complexType name="ArrayOfWeather">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="weather" nillable="true" type="tns:weather"/>
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:element name="getWeatherResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="weather" type="tns:weather" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="getWeatherAllResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="weathers" type="tns:ArrayOfWeather" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>
