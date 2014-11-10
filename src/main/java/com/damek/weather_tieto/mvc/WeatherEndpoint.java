@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Endpoint
 public class WeatherEndpoint {
-	private static final String NAMESPACE_URI = "http://localhost:8080/soap";
+	private static final String NAMESPACE_URI = "http://soap.weather_tieto.damek.com";
 
 	@Autowired
 	private WeatherDao weatherDao;

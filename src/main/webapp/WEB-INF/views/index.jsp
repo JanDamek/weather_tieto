@@ -45,14 +45,7 @@
 						<td>${status.lastRequest}</td>
 					</tr>
 				</tbody>
-			</table>
-			<table class="simpletablestyle">
-				<tr>
-					<td>REST URL for all members: <a
-						href="<c:url value="/rest/members"/>">/rest/members</a>
-					</td>
-				</tr>
-			</table>
+			</table>s
 
 
 			<form:form action="newLocation" commandName="newLocation"
