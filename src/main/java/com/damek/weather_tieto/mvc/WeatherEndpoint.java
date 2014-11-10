@@ -2,13 +2,16 @@ package com.damek.weather_tieto.mvc;
 
 import java.io.IOException;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
+import com.damek.weather_tieto.repo.WeatherDao;
+import com.damek.weather_tieto.soap.GetWeatherRequest;
+import com.damek.weather_tieto.soap.GetWeatherResponse;
+import com.damek.weather_tieto.soap.Weather;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,14 +20,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class WeatherEndpoint {
 	private static final String NAMESPACE_URI = "http://localhost:8080/";
 
-	@Resource(name="data")
-	private DataOfWeather data;
+	@Autowired
+	private WeatherDao weatherDao;
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getWeatherRequest")
 	@ResponsePayload
-	public GetWeatherResponse getCountry(@RequestPayload GetWeatherRequest request) {
+	public GetWeatherResponse getWeather(@RequestPayload GetWeatherRequest request) {
 		GetWeatherResponse response = new GetWeatherResponse();
-		com.damek.weather.data.Weather w = data.findWeather(request.getWeatherLocation());
+		com.damek.weather_tieto.domain.Weather w = weatherDao.findByLocation(request.getWeatherLocation());
 		ObjectMapper mapper = new ObjectMapper();
 		Weather weather=null;
 		try {
